@@ -1,0 +1,8 @@
+﻿  Study3.cpp
+C:\Users\ldh11\OneDrive\Desktop\Hundiie\CPlusPlusStudy\Study3\Study3\Study3.cpp(34,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\ldh11\OneDrive\Desktop\Hundiie\CPlusPlusStudy\Study3\Study3\Study3.cpp(35,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\ldh11\OneDrive\Desktop\Hundiie\CPlusPlusStudy\Study3\Study3\Study3.cpp(37,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\ldh11\OneDrive\Desktop\Hundiie\CPlusPlusStudy\Study3\Study3\Study3.cpp(38,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\ldh11\OneDrive\Desktop\Hundiie\CPlusPlusStudy\Study3\Study3\Study3.cpp(63,38): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\ldh11\OneDrive\Desktop\Hundiie\CPlusPlusStudy\Study3\Study3\Study3.cpp(71,38): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Study3.vcxproj -> C:\Users\ldh11\OneDrive\Desktop\Hundiie\CPlusPlusStudy\Study3\Debug\Study3.exe
