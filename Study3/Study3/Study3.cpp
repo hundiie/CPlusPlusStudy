@@ -123,5 +123,9 @@ int main()
 
     //rand() % 96 + 5이면 5~100까지의 수가 생성됨. (5 ~(96 + 5 - 1))
     //srand(time(NULL));
+<<<<<<< Updated upstream
     //cout << "Random Num : " << rand() %100 << "\n";
     
+=======
+    //cout << "Random Num : " << rand() %100 << "\n";
+>>>>>>> Stashed changes
