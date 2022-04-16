@@ -43,10 +43,6 @@ int main()
 
 			switch (random[0])
 			{
-			//case 0: mapData[i][j] = land.field_num;//평지 : 1
-				//break;
-			//case 1: mapData[i][j] = walls.field_num;//벽 : 2
-				//break;
 			default:mapData[i][j] = land.field_num;//평지 : 1
 				break;
 			}
