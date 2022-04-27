@@ -10,6 +10,12 @@ struct field
 	string icon;
 
 }walls,land,player_;
+struct xy
+{
+	int x;
+	int y;
+}w, p, l;
+
 int main()
 {
 	string map[12][12];
@@ -54,8 +60,9 @@ int main()
 	
 	while (true)
 	{
-		if (win == 1)//게임오버 텍스트
-		{
+		while (win == 1)
+		{//게임오버 텍스트
+		
 			system("cls");
 			cout << "    ■■        ■      ■      ■  ■■■■" << endl;
 			cout << "  ■    ■    ■  ■    ■■  ■■  ■" << endl;
@@ -70,7 +77,7 @@ int main()
 			cout << "        ■    ■     ■■     ■        ■   ■" << endl;
 			cout << "          ■■        ■      ■■■■  ■    ■" << endl << endl;
 			cout << "                score : " << ((wall_num - 44) * 100) + score << endl;
-			break;
+			cin >> random[1];
 		}
 		
 		system("cls");
