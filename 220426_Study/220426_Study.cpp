@@ -1,29 +1,166 @@
 ﻿#include <stdio.h>
 
-int N[1000000];
+
 int main()
 {
-		
-		int num = 0, low = 1000000, high = -1000000;
-
-		scanf("%d", &num);
-		for (int i = 0; i < num; i++)
-		{
-			scanf("%d", &N[i]);
-			if (N[i] <= low)
-			{
-				low = N[i];
-			}
-			if (N[i] >= high)
-			{
-				high = N[i];
-			}
-		}
-		printf("%d %d", low, high);
+}
 	
+	/*
+	char dan[1000000];
+	int eng[26] = { 0 };
+	int num = 0;
+
+	scanf("%s", dan);
+
+	while (dan[num] > 0)
+	{
+		if (dan[num] < 91)
+		{
+			dan[num] -= 65;
+		}
+		if (dan[num] > 96)
+		{
+			dan[num] -= 97;
+		}
+		if (dan[num] < 52)
+		{
+			eng[dan[num]]++;
+		}
+		num++;
+	}
+	int max = 0;
+	int max_t = 0;
+	int p = 0;
+	for (int i = 0; i < 26; i++)
+	{
+		
+		if (eng[i] >= max)
+		{
+			max = eng[i];
+			p = i;
+		}
+	}
+	for (int i = 0; i < 26; i++)
+	{
+		if (eng[i] == max)
+		{
+			max_t++;
+		}
+	}
+	if (max_t >= 2)
+	{
+		printf("?");
+	}
+	else
+	{
+		printf("%c", p + 65);
+	}
 }
 	/*
-	int c[10000] = { 0 };
+	int T;
+	int R;
+	char QC[20] = { 0 };
+	int a = 0;
+	scanf("%d", &T);
+	for (int i = 0; i < T; i++)
+	{
+		scanf("%d", &R);
+		scanf("%s", QC);
+		a = 0;
+		while (QC[a] > 0)
+		{
+			for (int k = 0; k < R; k++)
+			{
+				printf("%c", QC[a]);
+			}
+			a++;
+		}
+		printf("\n");
+	}
+}
+	/*
+	int eng[26];
+	char S[100];
+	int catch_;
+	int out_num = 0;
+
+	for (int i = 0; i < 26; i++)
+	{
+		eng[i] = -1;
+	}
+	scanf("%s", S);
+	for (int i = 0; i < 100; i++)
+	{
+		if (S[i] >= 97)
+		{
+			catch_ = S[i] - 97;
+			
+			if (eng[catch_]== -1)
+			{
+				eng[catch_] = out_num;
+			}
+			out_num++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	for (int i = 0; i < 26; i++)
+	{
+		printf("%d ", eng[i]);
+	}
+	return 0;
+}
+	/*
+	int n;
+	char a[100] = { 0 };
+	int	plus = 0;
+	scanf("%d", &n);
+	scanf("%s", a);
+	for (int j = 0; j < n; j++)
+	{
+		plus += a[j]-48;
+	}
+	printf("%d", plus);
+}
+	/*
+	int X;
+	int N;
+	
+	int num[3];
+	int count = 0;
+
+	scanf("%d", &N);
+
+	for (int i = 1; i < N + 1; i++)
+	{
+		if (i > 999)
+		{
+			break;
+		}
+		if (i < 100)
+		{
+			count++;
+		}
+		else
+		{
+			num[0] = i % 10;
+			num[1] = i / 10 % 10;
+			num[2] = i / 100 % 10;
+
+			int d = num[1] - num[0];
+
+			if (num[1] + d == num[2])
+			{
+				count++;
+			}
+		}
+	}
+	printf("%d", count);
+}
+	/*
+	int c[10000];
 	int first, sec;
 	sec = 0;
 	
