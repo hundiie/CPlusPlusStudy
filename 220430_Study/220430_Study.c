@@ -76,6 +76,7 @@ char strchr(const char* str1, const char str2)
 }
 int main()
 {
+
 	char a[100] = "asdfghxz";
 	char b[100] = "asdfgaxz";
 	
