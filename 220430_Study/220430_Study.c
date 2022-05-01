@@ -17,6 +17,7 @@ char strcpy(char* str, const char* cpy)
 	}
 	return str;
 }
+
 char strcat(char* str1, const char* str2)
 {
 	int n = 0;
@@ -31,7 +32,8 @@ char strcat(char* str1, const char* str2)
 	}
 	return str1;
 }
-int strlen(char* str)
+
+int strlen(const char* str)
 {
 	int count = 0;
 	for (int i = 0; str[i] != '\0'; i++)
@@ -40,6 +42,7 @@ int strlen(char* str)
 	}
 	return count;
 }
+
 char strcmp(const char* str1,const char* str2)
 {
 	for (int i = 0; str1[i] != '\0'; i++)
@@ -63,6 +66,7 @@ char strcmp(const char* str1,const char* str2)
 	}
 	return 0;
 }
+
 char strchr(char* str1, const char *str2)
 {
 	char* k = "";
@@ -78,7 +82,8 @@ char strchr(char* str1, const char *str2)
 			return str1;
 		}
 	}
-	return NULL;
+	*str1 = NULL;
+	return str1;
 }
 
 char strrchr(char* str1, const char* str2)
@@ -138,42 +143,43 @@ char strstr(char* str1, char* str2)
 	*str1 = NULL;
 	return str1;
 }
+
 int main()
 {
 	char a[100] = "asdzasdasdasdazsdasdasdasfzazsdfsafasfazsdsagdgfhahzsdeedf";
 	char b[100] = "z";
 	char c[100] = "zsd";
 
-	//글자 복사 strcpy
-	//strcpy(b, a);
-	//printf("%s\n", b);
+	//글자 복사 strcpy  앞의 변수에 뒤의 변수를 복사한다.
+	//strcpy(a, b);
 	//printf("%s\n", a);
+	//printf("%s\n", b);
 
-	//글자 합치기 strcat
+	//글자 합치기 strcat 앞의 변수 뒤에 뒤의 변수를 합친다.
 	//strcat(a, b);
 	//printf("%s\n", a);
 
-	//글자 수 세기 strlen
-	//int c = strlen(a);
-	//printf("%d\n", c);
-
-	//문자열 비교 strcmp 
-	//같으면 0 앞이 크면 1 뒤가 크면 -1
-	//int d = strcmp(a, b);
+	//글자 수 세기 strlen 변수에 저장된 문자열의 글자 수를 리턴한다.
+	//int d = strlen(a);
 	//printf("%d\n", d);
 
-	//문자 찾기 strchr
-	//for (int i = 0; i < 5; i++)
+	//문자열 비교 strcmp  두 변수를 비교하여 같으면 / 0 앞의 변수가 크면 1 / 뒤의 변수가 크면 -1
+	//int e = strcmp(a, b);
+	//printf("%d\n", e);
+
+	//문자 찾기 strchr 앞의 변수에 저장된 문자열에서 뒤의 변수에 저장된 문자를 찾아서 출력
+	//문자가 없으면 NULL 값 출력
+	//for (int i = 0; i < 7; i++)
 	//{
 	//	strchr(a, b);
 	//	printf("%s\n", a);
 	//}
 	
-	//문자 찾기 역순 strrchr
+	//문자 찾기 역순 strrchr 앞의 변수에 저장된 문자열에서 뒤의 변수에 저장된 문자를 뒤부터 찾아서 출력
 	//strrchr(a, b);
 	//printf("%s\n", a);
 
-	//문자열 속에서 문자열 찾기 strstr
+	//문자열 속에서 문자열 찾기 strstr 앞의 변수에 저장된 문자열에서 뒤의 변수에 저장된 문자열을 찾아서 출력
 	//for (int i = 0; i < 5; i++)
 	//{
 	//	strstr(a, c);
