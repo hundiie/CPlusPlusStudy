@@ -63,28 +63,92 @@ char strcmp(const char* str1,const char* str2)
 	}
 	return 0;
 }
-char strchr(const char* str1, const char str2)
+char strchr(char* str1, const char *str2)
 {
-	char* n;
-	for (int i = 0; str1[i] != '\0'; i++)
+	char* k = "";
+
+	for (int i = 1; str1[i] != '\0'; i++)
 	{
-		if (str1[i] == str2)
+		if (str1[i] == *str2)
 		{
-			str1[i]
+			for (int j = 0; str1[j] != '\0'; j++)
+			{
+				str1[j] = str1[j + i];
+			}
+			return str1;
 		}
 	}
+	return NULL;
+}
+
+char strrchr(char* str1, const char* str2)
+{
+	char* a = "";
+	int b = 0;
+	for (int i = 0; str1[i] != '\0'; i++)
+	{
+		b = i;
+	}
+	for (int i = b; i > 0; i--)
+	{
+		if (str1[i] == *str2)
+		{
+			for (int j = 0; str1[j] != '\0'; j++)
+			{
+				str1[j] = str1[j + i];
+			}
+			return str1;
+		}
+	}
+	*str1 = NULL;
+	return str1;
+}
+
+char strstr(char* str1, char* str2)
+{
+	int c = 0;
+
+	for (int i = 1; str1[i] != '\0'; i++)
+	{
+		if (str1[i] == str2[0])
+		{
+			for (int j = 0; str2[j] != '\0'; j++)
+			{
+				
+				if (str2[j] != str1[i + j])
+				{
+					c = 0;
+					break;
+				}
+				else
+				{
+					c = 1;
+				}
+			}
+			if (c == 1)
+			{
+				for (int k = 0; str1[k] != '\0'; k++)
+				{
+					str1[k] = str1[k + i];
+				}
+				return str1;
+			}
+		}
+	}
+	*str1 = NULL;
+	return str1;
 }
 int main()
 {
+	char a[100] = "asdzasdasdasdazsdasdasdasfzazsdfsafasfazsdsagdgfhahzsdeedf";
+	char b[100] = "z";
+	char c[100] = "zsd";
 
-	char a[100] = "asdfghxz";
-	char b[100] = "asdfgaxz";
-	
 	//글자 복사 strcpy
 	//strcpy(b, a);
 	//printf("%s\n", b);
 	//printf("%s\n", a);
-	
+
 	//글자 합치기 strcat
 	//strcat(a, b);
 	//printf("%s\n", a);
@@ -93,10 +157,27 @@ int main()
 	//int c = strlen(a);
 	//printf("%d\n", c);
 
-	//글자 비교 strcmp 
+	//문자열 비교 strcmp 
 	//같으면 0 앞이 크면 1 뒤가 크면 -1
 	//int d = strcmp(a, b);
 	//printf("%d\n", d);
 
+	//문자 찾기 strchr
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	strchr(a, b);
+	//	printf("%s\n", a);
+	//}
+	
+	//문자 찾기 역순 strrchr
+	//strrchr(a, b);
+	//printf("%s\n", a);
+
+	//문자열 속에서 문자열 찾기 strstr
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	strstr(a, c);
+	//	printf("%s\n", a);
+	//}
 }
 

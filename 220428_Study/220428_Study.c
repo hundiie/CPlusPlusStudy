@@ -80,7 +80,34 @@ int sum3(int x, int y, int z)
 	return x + y + z;
 }
 int main()
-{
+{ 
+	int T;
+
+	scanf("%d",&T);
+
+	for (int i = 0; i < T; i++)
+	{
+		int H, W, N; 
+	
+		scanf("%d %d %d", &H, &W, &N);
+		
+		int floor;
+		int room;
+		
+		floor = (N % H); 
+		room = (N / H) + 1; 
+
+		if ((N % H) == 0)
+		{
+			floor = H;
+			room = (N / H);
+		}
+		printf("%d%.2d\n", floor, room);
+	} return 0;
+}
+
+	/*
+	 
 
 	printf("%c", toupper('C'));
 	printf("%c", toupper('c'));
@@ -94,7 +121,7 @@ int main()
 	swap(&A, &B);
 	printf("%d %d", A, B);
 	*/
-}
+
 	/*
 	int T;
 	
@@ -113,12 +140,8 @@ int main()
 		
 		if (x == 0)
 		{
-			x = floor;
+			guest % floor+1;
 		}
-		{
-
-		}
-
 			printf("%d%.2d\n", x, y);
 	}
 }
