@@ -1,11 +1,74 @@
 ﻿#include <stdio.h>
 
+
+
+
 int main()
 {
-//큰 수 A+B
 
+}
+	/*
+	//큰 수 A+B
+	// 문자열로 숫자를 입력받아서 계산하기
+	char A[10001];
+	char B[10001];
+	int A2[10001];
+	int B2[10001];
+	int answer[10001];
 
-	// 0 1 2 3 4 5 6 7 8 9 a b c d e f
+	scanf("%s %s", A, B);
+
+	int a_long = 0;
+	
+	for (int i = 0; A[i] != '\0'; i++)
+	{
+		a_long++;
+	}
+	for (int i = 0; i < a_long; i++)
+	{
+		A2[i] = A[a_long - i - 1] - 48;
+	}
+
+	int b_long = 0;
+	
+	for (int i = 0; B[i] != '\0'; i++)
+	{
+		b_long++;
+	}
+	for (int i = 0; i < b_long; i++)
+	{
+		B2[i] = B[b_long - i - 1] - 48;
+	}
+
+	int count = 0;
+	int j = 0;
+	
+	while (a_long - 1 >= 0 || b_long - 1 >= 0)
+	{
+		j = 0;
+		
+		answer[count] += A2[count] + B2[count];
+	
+		if (answer[count] >= 10)
+		{
+			j = 1;
+			answer[count + 1] += 1;
+			answer[count] -= 10;
+		}
+		
+		count++;
+		a_long--;
+		b_long--;
+	}
+	
+	if (j == 0)
+	{
+		count--;
+	}
+	for (int i = count+1; i > 0; i--)
+	{
+		printf("%d", answer[i - 1]);
+	}
 }
 /*
 //설탕 배달
