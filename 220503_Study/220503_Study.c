@@ -28,43 +28,40 @@ void myprintf(char* format, ...)
 
 	while (*format != '\0')
 	{
-		printf("%c", *format);
-
 		if (*format == '%')
 		{
-			
 			++format;
 			if (*format == 'd')
 			{
-				format -= 2;
 				int result = va_arg(args, int);
-				printf("%d", result);
-				format += 1;
+				printf("%d", result); 
+				++format;
 			}
 			else if (*format == 'c')
 			{
-				format -= 2;
 				int result = va_arg(args, int);
 				printf("%c", result);
-				format += 2;
+				++format;
 			}
 			else if (*format == 's')
 			{
-				format -= 2;
 				double result = va_arg(args, double);
 				printf("%s", result);
-
+				++format;
 				//for (char result = va_arg(args, char*); *word; word++);
-				format += 2;
+				
 			}
 		}
-		++format;
+		printf("%c", *format);
+		++format; 
+		
 	}
+		
 	va_end(args);
 }
 
 int main()
 {
-	myprintf(": %d, %c, %s \n", 10, 'A', "Hello");
+	myprintf(": %d, %c, %s \n", 10, 'A', "HellASDASDASDASDASDASDo");
 	return 0;
 }
