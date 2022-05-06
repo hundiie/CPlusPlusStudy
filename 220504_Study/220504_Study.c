@@ -83,11 +83,11 @@ int main()
 	// 돌려주지 않으면 메모리 누수가 발생한다.
 	// free(p) 메모리 반환
 	
-	//int n = 1;// 메모리 무한으로 늘리기
-	//while (1)
-	//{
-	//	int* p = malloc(sizeof(int) * n);
-	//}
+	int n = 1;// 메모리 무한으로 늘리기
+	while (1)
+	{
+		int* p = malloc(sizeof(int) * n);
+	}
 
 	//메모리를 관리 할 때 문제
 	// 1. 언제 사용이 끝나는지 불명확 >반환안됨 > 누수
@@ -96,6 +96,10 @@ int main()
 	//free(p);
 	// p = NULL;
 	// p를 반환 후 널값으로 만들면 2, 3 은 방지가능
+
+	//typedef [type] [이름] :타입을 재정의 해주는 것
+	
+
 
 	//1. 파일을 다루는 객체 생성
 	FILE* fp = NULL;
