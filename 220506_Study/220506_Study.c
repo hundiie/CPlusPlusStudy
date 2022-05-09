@@ -53,6 +53,48 @@ code : 프로그램 명령어
 //
 int main()
 {
+	int min = 1;
+	long long max;
+	int K;
+	int count2 = 0;
+	scanf("%lld %d", &max, &K);
+	while (min <= 1 && max > 1)
+	{
+		min++;
+	}
+	for (int i = min; i <= max; i++)
+	{
+		if (min == 1)
+		{
+			break;
+		}
+		
+		int count = 0;
+
+		for (int j = 2; j < i; j++)
+		{
+			if (i % j == 0 && i != j)
+			{
+				count2++;
+				count = 1;
+				break;
+			}
+		}
+		if (count2 == K + 1)
+		{	
+			count2 = i;
+			break;
+		}
+		if (max <= 1)
+		{
+			break;
+		}
+	}
+	printf("%d", count2);
+}
+
+/*int main()
+{
 	int min;
 	int max;
 	int answer2 = 0;
@@ -62,11 +104,16 @@ int main()
 	scanf("%d", &min);
 	scanf("%d", &max);
 	
+	if (min <= 1 && max > 1)
+	{
+		min++;
+	}
+	
 	for (int i = min; i <= max; i++)
-	{	
-		while (i <= 1)
+	{
+		if (min == 1 && max == 1)
 		{
-			i++;
+			break;
 		}
 		int count = 0;
 		
@@ -99,4 +146,4 @@ int main()
 		printf("%d\n", answer);
 		printf("%d\n", answer2);
 	}
-}
+}*/
