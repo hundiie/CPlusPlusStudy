@@ -1,62 +1,122 @@
+#include <stdbool.h>
+#include <stdio.h>
+#include <Windows.h>
+#include <time.h>
 
-#include "common.h"
+#define SCENE(x) while (scene == x)
+#define Key_Input 0x8000 & GetAsyncKeyState
+#define C(x) SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),x)
+#define CuserMove(x,y) COORD i = {x ,y }; C(i)
 
-#define GA_N 0x8000 & GetAsyncKeyState
-#define CuserMove SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord)
+struct Position
+{
+	float x;
+	float y;
+}Player,shot,mapLimit;
+
+struct Position Player = { 1,1 };
+struct Position shot = { 0,0 };
+struct Position mapLimit = { 1,40 };
+
+int scene = 0;
+
 int main(void)
 {
-	int x = 1;// 플레이어 좌표
-	int y = 1;
-	
-	int shot_x=0;//총알 시작 좌표
-	int shot_y=0;
+	//커서 숨기기
+	CONSOLE_CURSOR_INFO cursorInfo = { 0,};
+	cursorInfo.dwSize = 1;
+	cursorInfo.bVisible = FALSE;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 
-	int Time_Save = 0;
-	int page= 0;
-	int in = 0;
-	clock_t Time1 = clock();
-	while (1)
+	clock_t prevTick = clock();
+
+	SCENE(0)
 	{
-		clock_t Time2 = clock();
-		int SecTime = (Time2 - Time1) / CLOCKS_PER_SEC;//시간 초를 구한다.
+		//clock_t currentTick = clock();
+		//float SecTime = (currentTick - prevTick) / CLOCKS_PER_SEC;//시간값 구하기.
 
-		printf("%d", SecTime);//시간을 표시한다.
-	
-		COORD coord = { x,y };
-		CuserMove;
-		printf("P");
+		char* Title[] = { "게임을", "시작하려면", "스페이스바" };
+		CuserMove(10, 10);
+		printf("%s ", Title[0]);
 
-		if (SecTime <= Time_Save&& in == 1)//스페이스를 눌렀을 때 시간+3초를 INTIME에 저장해서 3초 동안 총알이 날아가게 함
+		printf("%s ", Title[1]);
+
+		printf("%s ", Title[2]);
+		if (Key_Input(VK_SPACE))
 		{
-			COORD coord = { shot_x,shot_y };
-			CuserMove;
-			printf("O");
-			shot_x += 2;//총알 속도
-		}
-		if (GA_N(VK_UP))
-		{
-			y--;
-		}
-		if (GA_N(VK_DOWN))
-		{
-			y++;
-		}
-		if (GA_N(VK_LEFT))
-		{
-			x--;
-		}
-		if (GA_N(VK_RIGHT))
-		{
-			x++;
-		}
-		if (SecTime >= Time_Save && GA_N(VK_SPACE))
-		{
-			shot_x = x + 1;//총알이 시작하는 위치를 정함
-			shot_y = y;//총알이 시작하는 위치를 정함
-			Time_Save = SecTime + 3;//INTIME에 현재 초+3초를 저장한다.
-			in = 1;//첫 총알을 발사 했는지 여부를 체크한다.
+			scene = 1;
 		}
 		Sleep(10);
 		system("cls");
+	}
+	SCENE(1)
+	{
+		clock_t prevTick = clock();
+
+		int Time_Save = 0;
+		bool first_shot = false;
+
+		while (1)
+		{
+			clock_t currentTick = clock();
+			float SecTime = (currentTick - prevTick) / CLOCKS_PER_SEC;//시간값 구하기.
+			printf("%.0f\n", SecTime);//시간을 표시한다.
+			//----------입력부
+
+			//키입력
+			if (Key_Input(VK_UP))
+			{
+				if (Player.y > mapLimit.x)
+				{
+					Player.y--;
+				}
+			}
+			if (Key_Input(VK_DOWN))
+			{
+				if (Player.y < mapLimit.y)
+				{
+					Player.y++;
+				}
+			}
+			if (Key_Input(VK_LEFT))
+			{
+				if (Player.x > mapLimit.x)
+				{
+					Player.x--;
+				}
+			}
+			if (Key_Input(VK_RIGHT))
+			{
+				if (Player.x < mapLimit.y)
+				{
+					Player.x++;
+				}
+			}
+
+			if (SecTime >= Time_Save && Key_Input(VK_SPACE))
+			{
+				shot.x = Player.x + 1;//총알이 시작하는 위치를 정함
+				shot.y = Player.y;//총알이 시작하는 위치를 정함
+				Time_Save = SecTime + 3;//Time_save에 현재 시간초 + 3초를 저장한다.
+				first_shot = true;//첫 총알을 발사 했는지 여부를 체크한다.
+			}
+
+			//----------출력부
+
+			CuserMove(Player.x, Player.y);
+				printf("P");
+
+			//스페이스를 눌렀을 때 시간+3초를 Time_save에 저장해서 3초 동안 총알이 날아가게 함
+
+			if (SecTime <= Time_Save && first_shot == true)
+			{
+				CuserMove(shot.x, shot.y);
+					printf("O");
+				shot.x += 0.8;//총알 속도
+			}
+
+			Sleep(10);
+			system("cls");
+		}
 	}
 }
