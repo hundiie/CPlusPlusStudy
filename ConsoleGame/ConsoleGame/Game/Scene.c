@@ -170,9 +170,6 @@ void init_SCENE2(void)
 
 	Scene2daTa* data = (Scene2daTa*)g_Scene.Data;
 	
-		
-	
-		
 }
 int elapsedTime = 0;
 void update_SCENE2(void)

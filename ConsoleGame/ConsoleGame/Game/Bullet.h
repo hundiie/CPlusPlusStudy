@@ -9,7 +9,7 @@ typedef struct tagBullet
 	COORD	Coord;
 	float	ActiveTime;
 	float	ElapsedTimeForMove;
-	Text	Text;
+	Text	Text[128];
 	struct tagGun* Gun;
 } Bullet;
 
