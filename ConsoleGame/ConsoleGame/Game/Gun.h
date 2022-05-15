@@ -9,6 +9,7 @@
 
 typedef struct tagGun
 {
+	int32	BulletNum;//총알의 번호
 	int32	BulletCount;
 	Bullet	Bullet[MAX_BULLET_COUNT];
 } Gun;
