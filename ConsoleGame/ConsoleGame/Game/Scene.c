@@ -8,6 +8,7 @@
 #include "Framework/Random.h"
 
 #include "Player.h"
+#include "script.h"
 
 Scene g_Scene;
 
@@ -31,7 +32,7 @@ typedef struct tagTitleSceneData
 void reset_title(TitleSceneData* data)
 {
 	TextCopyWithWhite(data->TitleText[0], L"스페이스키를");
-	TextCopyWithWhite(data->TitleText[1], L"누르면");
+	TextCopyWithWhite(data->TitleText[1], L"누르면"	);
 	TextCopyWithWhite(data->TitleText[2], L"다음으로 넘어갑니다.");
 
 	setCoord(&data->TitleCoords[0], 10, 0);
@@ -90,6 +91,10 @@ void update_title(void)
 	if (Input_GetKeyDown('Q'))
 	{
 		Scene_SetNextScene(SCENE_SCENE2);
+	}
+	if (Input_GetKeyDown('T'))
+	{
+		Scene_SetNextScene(SCENE_TEST2);
 	}
 }
 
@@ -161,24 +166,21 @@ typedef struct tagScene2Data
 	Text	Scene2[128];
 	int32	Len;
 	COORD	Coord;
-}Scene2daTa;
+}SCENE2data;
 
 
 void init_SCENE2(void)
 {
-	g_Scene.Data = malloc(sizeof(Scene2daTa));
+	g_Scene.Data = malloc(sizeof(SCENE2data));
 
-	Scene2daTa* data = (Scene2daTa*)g_Scene.Data;
+	SCENE2data* data = (SCENE2data*)g_Scene.Data;
 	
-		
-	
-		
 }
 int elapsedTime = 0;
 void update_SCENE2(void)
 {
 	elapsedTime += Timer_GetDeltaTime();
-	Scene2daTa* data = (Scene2daTa*)g_Scene.Data; if (elapsedTime >= 0.5f);
+	SCENE2data* data = (SCENE2data*)g_Scene.Data; if (elapsedTime >= 0.5f);
 	{
 		elapsedTime = 0.0f;
 		data->Coord.X = Random_GetNumberFromRange(10, 30);
@@ -189,7 +191,7 @@ void update_SCENE2(void)
 }
 void render_SCENE2(void)
 {
-	Scene2daTa* data = (Scene2daTa*)g_Scene.Data;
+	SCENE2data* data = (SCENE2data*)g_Scene.Data;
 	Renderer_DrawText(data->Scene2, data->Len, data->Coord.X, data->Coord.Y);
 }
 void release_SCENE2(void)
@@ -198,7 +200,34 @@ void release_SCENE2(void)
 }
 #pragma endregion
 
+#pragma region TEST2
+typedef struct tagTEST2Data
+{
+	Script Script;
 
+}TEST2Data;
+
+
+void init_TEST2(void)
+{
+	g_Scene.Data = malloc(sizeof(TEST2Data));
+	TEST2Data* data = (TEST2Data*)g_Scene.Data;
+	Script_Init(&data->Script);
+}
+
+void update_TEST2(void)
+{
+	TEST2Data* data = (TEST2Data*)g_Scene.Data;
+}
+void render_TEST2(void)
+{
+	TEST2Data* data = (TEST2Data*)g_Scene.Data;
+}
+void release_TEST2(void)
+{
+	SafeFree(g_Scene.Data);
+}
+#pragma endregion
 bool Scene_IsSetNextScene(void)
 {
 	if (SCENE_NULL == s_nextScene)
@@ -247,6 +276,12 @@ void Scene_Change(void)
 		g_Scene.Update = update_SCENE2;
 		g_Scene.Render = render_SCENE2;
 		g_Scene.Release = release_SCENE2;
+		break;
+	case SCENE_TEST2:
+		g_Scene.Init = init_TEST2;
+		g_Scene.Update = update_TEST2;
+		g_Scene.Render = render_TEST2;
+		g_Scene.Release = release_TEST2;
 		break;
 	}
 

@@ -32,8 +32,15 @@ void Player_Update(Player* player)
 		++player->Coord.X;
 	}
 
-	if (Input_GetKeyDown(VK_SPACE))
+	if (Input_GetKeyDown('1'))
 	{
+		player->Gun.BulletNum = 0;
+		Gun_Shoot(&player->Gun, player->Coord.X + 1, player->Coord.Y);
+	}
+	
+	if (Input_GetKeyDown('2'))
+	{
+		player->Gun.BulletNum = 1;
 		Gun_Shoot(&player->Gun, player->Coord.X + 1, player->Coord.Y);
 	}
 

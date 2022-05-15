@@ -5,12 +5,12 @@
 
 typedef struct tagBullet
 {
-	bool	IsActive;
-	COORD	Coord;
-	float	ActiveTime;
-	float	ElapsedTimeForMove;
-	Text	Text;
-	struct tagGun* Gun;
+	bool	IsActive;//총알 유무
+	COORD	Coord;//총알 위치
+	float	ActiveTime;//총알 존재시간
+	float	ElapsedTimeForMove;//총알 이동시간
+	Text*	Text[5];//총알 문자
+	struct tagGun* Gun;//구조체 건
 } Bullet;
 
 void Bullet_Init(Bullet* bullet, struct tagGun* gun);

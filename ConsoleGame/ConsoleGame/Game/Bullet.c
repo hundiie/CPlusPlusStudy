@@ -6,17 +6,27 @@
 
 void Bullet_Init(Bullet* bullet, struct tagGun* gun)
 {
-	SetCoord(bullet->Coord, 0, 0);
-	bullet->ElapsedTimeForMove = 0.0f;
 	bullet->IsActive = false;
+	SetCoord(bullet->Coord, 0, 0);
 	bullet->ActiveTime = 3.0f;
+	bullet->ElapsedTimeForMove = 0.0f;
 	TextCopy(&bullet->Text, L"¡Û", TEXT_COLOR_YELLOW | TEXT_COLOR_STRONG);
-	bullet->Gun = gun;
+	bullet->Gun= gun;
 }
 
 
 void Bullet_Update(Bullet* bullet)
 {
+	switch (bullet->Gun->BulletNum)
+	{
+	case 0:TextCopy(&bullet->Text, L"¡Û", TEXT_COLOR_YELLOW | TEXT_COLOR_STRONG);
+		break;
+	case 1:TextCopy(&bullet->Text, L"¡Û", TEXT_COLOR_GREEN | TEXT_COLOR_STRONG);
+		break;
+	default:
+		break;
+	}
+
 	if (false == bullet->IsActive)
 	{
 		return;
@@ -47,7 +57,9 @@ void Bullet_Render(Bullet* bullet)
 	}
 
 	Text* text = &bullet->Text;
+	
 	Renderer_DrawText(text, 1, bullet->Coord.X, bullet->Coord.Y);
+	
 }
 
 void Bullet_Release(Bullet* bullet)
