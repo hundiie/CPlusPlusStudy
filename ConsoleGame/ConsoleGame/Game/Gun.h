@@ -9,12 +9,12 @@
 
 typedef struct tagGun
 {
-	int32	BulletNum;//총알의 번호
 	int32	BulletCount;
 	Bullet	Bullet[MAX_BULLET_COUNT];
 } Gun;
 
 void Gun_Init(Gun* gun);
+void Gun_Init1(Gun* gun);
 void Gun_Update(Gun* gun);
 void Gun_Render(Gun* gun);
 void Gun_Release(Gun* gun);

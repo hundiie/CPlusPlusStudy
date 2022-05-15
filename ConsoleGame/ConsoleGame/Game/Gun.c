@@ -6,10 +6,18 @@ void Gun_Init(Gun* gun)
 	{
 		Bullet_Init(&gun->Bullet[i], gun);
 	}
+	
 	gun->BulletCount = 0;
-	gun->BulletNum = 0;
 }
+void Gun_Init1(Gun* gun1)
+{
+	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
+	{
+		Bullet_Init1(&gun1->Bullet[i], gun1);
+	}
 
+	gun1->BulletCount = 0;
+}
 void Gun_Update(Gun* gun)
 {
 	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
