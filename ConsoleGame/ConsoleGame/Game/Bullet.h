@@ -9,12 +9,11 @@ typedef struct tagBullet
 	COORD	Coord;
 	float	ActiveTime;
 	float	ElapsedTimeForMove;
-	Text	Text[128];
+	Text	Text;
 	struct tagGun* Gun;
 } Bullet;
 
 void Bullet_Init(Bullet* bullet, struct tagGun* gun);
-void Bullet_Init1(Bullet* bullet, struct tagGun* gun);
 void Bullet_Update(Bullet* bullet);
 void Bullet_Render(Bullet* bullet);
 void Bullet_Release(Bullet* bullet);

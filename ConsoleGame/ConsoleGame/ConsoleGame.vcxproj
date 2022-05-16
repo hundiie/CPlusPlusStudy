@@ -152,7 +152,6 @@
     <ClCompile Include="Game\Player.c" />
     <ClCompile Include="Game\Scene.c" />
     <ClCompile Include="Main.c" />
-    <ClCompile Include="script.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
@@ -167,7 +166,6 @@
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\Scene.h" />
     <ClInclude Include="Macro.h" />
-    <ClInclude Include="script.h" />
     <ClInclude Include="Type.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

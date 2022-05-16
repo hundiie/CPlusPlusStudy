@@ -14,7 +14,6 @@ typedef struct tagGun
 } Gun;
 
 void Gun_Init(Gun* gun);
-void Gun_Init1(Gun* gun);
 void Gun_Update(Gun* gun);
 void Gun_Render(Gun* gun);
 void Gun_Release(Gun* gun);

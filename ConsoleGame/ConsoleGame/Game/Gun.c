@@ -2,25 +2,16 @@
 
 void Gun_Init(Gun* gun)
 {
-	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
+	for (int32 i = 0; i < 20; ++i)
 	{
 		Bullet_Init(&gun->Bullet[i], gun);
 	}
-	
 	gun->BulletCount = 0;
 }
-void Gun_Init1(Gun* gun1)
-{
-	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
-	{
-		Bullet_Init1(&gun1->Bullet[i], gun1);
-	}
 
-	gun1->BulletCount = 0;
-}
 void Gun_Update(Gun* gun)
 {
-	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
+	for (int32 i = 0; i < 20; ++i)
 	{
 		Bullet_Update(&gun->Bullet[i]);
 	}
@@ -28,7 +19,7 @@ void Gun_Update(Gun* gun)
 
 void Gun_Render(Gun* gun)
 {
-	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
+	for (int32 i = 0; i < 20; ++i)
 	{
 		Bullet_Render(&gun->Bullet[i]);
 	}
@@ -36,7 +27,7 @@ void Gun_Render(Gun* gun)
 
 void Gun_Release(Gun* gun)
 {
-	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
+	for (int32 i = 0; i < 20; ++i)
 	{
 		Bullet_Release(&gun->Bullet[i]);
 	}
@@ -48,7 +39,8 @@ void Gun_Shoot(Gun* gun, int32 x, int32 y)
 	{
 		return;
 	}
-	for (int32 i = 0; i < MAX_BULLET_COUNT; ++i)
+
+	for (int32 i = 0; i < 20; ++i)
 	{
 		if (false == gun->Bullet[i].IsActive)
 		{

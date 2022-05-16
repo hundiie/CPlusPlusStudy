@@ -8,7 +8,6 @@ void Player_Init(Player* player)
 	TextCopyWithWhite(&player->Text, L"P");
 	SetCoord(player->Coord, 0, 0);
 	Gun_Init(&player->Gun);
-	Gun_Init1(&player->Gun1);
 }
 
 void Player_Update(Player* player)
@@ -33,18 +32,12 @@ void Player_Update(Player* player)
 		++player->Coord.X;
 	}
 
-	if (Input_GetKeyDown('1'))
+	if (Input_GetKeyDown(VK_SPACE))
 	{
 		Gun_Shoot(&player->Gun, player->Coord.X + 1, player->Coord.Y);
 	}
-	
-	if (Input_GetKeyDown('2'))
-	{
-		Gun_Shoot(&player->Gun1, player->Coord.X + 1, player->Coord.Y);
-	}
 
 	Gun_Update(&player->Gun);
-	Gun_Update(&player->Gun1);
 }
 
 void Player_Render(Player* player)
@@ -53,11 +46,9 @@ void Player_Render(Player* player)
 	Renderer_DrawText(text, 1, player->Coord.X, player->Coord.Y);
 
 	Gun_Render(&player->Gun);
-	Gun_Render(&player->Gun1);
 }
 
 void Player_Release(Player* player)
 {
 	Gun_Release(&player->Gun);
-	Gun_Release(&player->Gun1);
 }
