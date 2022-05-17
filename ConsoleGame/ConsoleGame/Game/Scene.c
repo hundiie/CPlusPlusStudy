@@ -164,37 +164,33 @@ void release_main(void)
 #pragma region Scene3
 
 #define MAXTEXT 3
-
+#define ASDF char* a[128] = {L"첫번째 텍스트를 출력",L"두번째 텍스트를 출력",L"세번째 텍스트를 출력" };
 typedef struct tagScene3Data
 {
 	Text Scene3Text[MAXTEXT][128];
 	COORD Scene3Coords;
 } Scene3Data;
-
+struct Scene3Data *Scene3Text = {
+	L"첫번째 텍스트를 출력"
+	L"두번째 텍스트를 출력"
+	L"세번째 텍스트를 출력"
+};
 
 
 char TEXTDAT(int g)
 {
-	char* a[128] = {
-		L"첫번째 텍스트를 출력",//0
-		L"두번째 텍스트를 출력",//1
-		L"세번째 텍스트를 출력" //2
-	};
+	ASDF
 	return a[g];
 }
 
 void reset_scene3(Scene3Data* data)
 {
-	char* a[128] = {
-		L"첫번째 텍스트를 출력",//0
-		L"두번째 텍스트를 출력",//1
-		L"세번째 텍스트를 출력" //2
-	};
+	ASDF
 	for (int i = 0; i < MAXTEXT; i++)
 	{
 		TextCopy(data->Scene3Text[i],a[i], 15);
 	}
-	setCoord(&data->Scene3Coords  , 3, 20);
+	setCoord(&data->Scene3Coords , 3, 20);
 }
 
 void init_scene3(void)
@@ -209,11 +205,7 @@ int count = 0;
 
 void update_scene3(void)
 {
-	char* a[128] = {
-		L"첫번째 텍스트를 출력",//0
-		L"두번째 텍스트를 출력",//1
-		L"세번째 텍스트를 출력" //2
-	};
+	ASDF
 
 	Scene3Data* data = (Scene3Data*)g_Scene.Data;
 
@@ -231,6 +223,22 @@ void update_scene3(void)
 			count++;
 		}
 	}
+	
+	if (Input_GetKeyDown('F'))
+	{
+		switch (count)
+		{
+		case 0:Scene_SetNextScene(SCENE_SCENE4);
+			break;
+		case 1:Scene_SetNextScene(SCENE_SCENE5);
+			break;
+		case 2:Scene_SetNextScene(SCENE_SCENE5);
+			break;
+		default:
+			break;
+		}
+	}
+	
 	reset_scene3(data);
 	TextCopy(data->Scene3Text[count],a[count], 1);
 }
@@ -250,6 +258,40 @@ void release_scene3(void)
 	free(g_Scene.Data);
 	g_Scene.Data = NULL;
 }
+
+#pragma endregion
+#pragma region Scene4
+void init_scene4 (void)
+{
+}
+void update_scene4 (void)
+{
+}
+void render_scene4 (void)
+{
+}
+void release_scene4(void)
+{
+}
+
+
+#pragma endregion
+
+#pragma region Scene5
+void init_scene5(void)
+{
+}
+void update_scene5(void)
+{
+}
+void render_scene5(void)
+{
+}
+void release_scene5(void)
+{
+}
+
+
 #pragma endregion
 bool Scene_IsSetNextScene(void)
 {
@@ -294,11 +336,23 @@ void Scene_Change(void)
 		g_Scene.Render = render_main;
 		g_Scene.Release = release_main;
 		break;
-	case SCENE_SCENE3 :
+	case SCENE_SCENE3:
 		g_Scene.Init = init_scene3;
 		g_Scene.Update = update_scene3;
 		g_Scene.Render = render_scene3;
 		g_Scene.Release = release_scene3;
+		break;
+	case SCENE_SCENE4:
+		g_Scene.Init = init_scene4;
+		g_Scene.Update = update_scene4;
+		g_Scene.Render = render_scene4;
+		g_Scene.Release = release_scene4;
+		break;
+	case SCENE_SCENE5:
+		g_Scene.Init = init_scene5;
+		g_Scene.Update = update_scene5;
+		g_Scene.Render = render_scene5;
+		g_Scene.Release = release_scene5;
 		break;
 	}
 
