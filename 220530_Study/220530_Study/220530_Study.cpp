@@ -64,34 +64,71 @@ public:
 
 class A
 {
-	void A(int& a)
-	{
-		int _data;
-	}
 public:
-
-	// 복사 후 교환 관용구를 사용하려면 매개변수의 타입은 레퍼런스가 아니어야 한다.
-	A& operator=(A a)
+	// const로 수식된 인스턴스 메소드
+	void Boo() const
 	{
-		// std::swap()을 이용해 멤버 별로 교체해준다.
-		std::swap(_data, a._data);
-
-		return *this;
+		//_data += 10; // 컴파일 오류! 데이터 수정 불가능
 	}
+	
+	// 오버로딩이 가능하다.
+	void Foo() const {}
+	void Foo() { _data += 10; }
+	
+	void Boo() { _data += 20; }
+
+private:
+	int _data;
 };
 
+class B
+{
+public:
+	B() : _p(malloc(sizeof(int) * 3)) { }
+
+	B(const B& other)
+		: _p(malloc(sizeof(int) * 3))
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			_p[i] = other._p[i];
+		}
+	}
+
+	~B() { free(_p); _p = nullptr; }
+
+	void Foo(int index, int value)
+	{
+		_p[index] = value;
+	}
+private:
+	int* _p;
+};
+
+//선언 :식별자를 컴파일러에게 알리는 것
+//정의 :식별자에 관련된 정보 제공
+//할당 :메모리에 값을 저장하는 것
+//초기화 :정의하면서 값을 넣어주는 것
 
 int main()
 {
+	B a;
+	B a2 = a; // 이제는 서로 다른 영역을 가리킨다.
+	a2.Foo(2, 10); // 이제는 a에게 영향을 주지 않는다.
+
+	/*const A a;
+	a.Foo(); 
+	a.Boo(); */
+
 	//sang a;
 	//sog b;
-
-	A a;
+	
+	/*A a;
 	A b;
 	b = a;
 
 	printf("%d", a);
-	printf("%d", b);
+	printf("%d", b);*/
 
 	
 
