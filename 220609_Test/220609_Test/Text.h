@@ -1,13 +1,17 @@
 #pragma once
 
-#include <Windows.h>
+#include "Common.h"
 
-typedef CHAR_INFO TExt;
+#define TextCopyWithWhite(dest, src) TextCopy(dest, src, TEXT_COLOR_WHITE)
 
-class Text
+class TEXT
 {
 	
+	
 public:
+
+
+	typedef CHAR_INFO Text;
 	enum Color
 	{
 		TEXT_COLOR_BLACK,
@@ -32,34 +36,35 @@ public:
 		BACK_COLOR_WHITE = BACK_COLOR_RED | BACK_COLOR_BLUE | BACK_COLOR_GREEN,
 		BACK_COLOR_STRONG = BACKGROUND_INTENSITY
 	};
+
 public:
-	static void Copy(Text* dest, const WCHAR* src, WORD attributes)
+	static void Copy(TEXT* dest, const WCHAR* src, WORD attributes)
 	{
 		while (*src)
 		{
 			dest->_info.Char.UnicodeChar = *src;
 			dest->_info.Attributes = attributes;
-			
+
 			++dest;
 			++src;
 		}
 		dest->_info.Char.UnicodeChar = L'\0';
 		dest->_info.Attributes = 0;
 	}
-	static void Copy(Text* dest, const WCHAR* src)
+	static void Copy(TEXT* dest, const WCHAR* src)
 	{
 		Copy(dest, src, TEXT_COLOR_WHITE);
 	}
-	static int GetLength(const Text* text)
+	static int GetLength(const TEXT* text)
+	{
+		int result = 0;
+		while (text->_info.Char.UnicodeChar)
 		{
-			int result = 0;
-			while (text->_info.Char.UnicodeChar)
-			{
-				++result;
-				++text;
-			}
-			return result;
+			++result;
+			++text;
 		}
+		return result;
+	}
 
 private:
 	

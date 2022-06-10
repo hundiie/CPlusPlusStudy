@@ -1,62 +1,43 @@
 ﻿#include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
-#define pat1 5//반복 수를 매크로로 저장
-#define pat2 8
-#define pat3 10
-
 vector<int> solution(vector<int> answers)
-{//반복 패턴 저장
-	int player1[pat1] = { 1,2,3,4,5 };
-	int player2[pat2] = { 2,1,2,3,2,4,2,5 };
-	int player3[pat3] = { 3,3,1,1,2,2,4,4,5,5 };
+{
+	int player[3][10] = { { 1,2,3,4,5 }, { 2, 1, 2, 3, 2, 4, 2, 5 }, { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5 } };
 
 	vector<int> answer;
 
-	vector<int> _player1;
-	vector<int> _player2;
-	vector<int> _player3;
+	vector<int> _player[3];
 
-	int count1[2] = { 0 };//[0]은 반복 패턴 수 카운터 [1]은 정답 수 카운터
-	int count2[2] = { 0 };
-	int count3[2] = { 0 };
-
+	int count[3] = { 0 };
+	
 	for (size_t i = 0; i < answers.size(); i++)
 	{
-		_player1.push_back(player1[count1[0]]);	//수포자가 찍은 정답 대입
-		if (_player1[i] == answers[i])			// 수포자가 찍은 정답과 정답을 비교
-		{count1[1]++;}	// 정답일 때 카운터[1] + 1
-		count1[0]++;	//반복 패턴 +1
-		if (count1[0] > pat1 - 1)	// 반복 패턴 끝나면 처음부터 반복 패턴 시작
-		{count1[0] = 0;}
-
-		_player2.push_back(player2[count2[0]]);//수포자2 반복
-		if (_player2[i] == answers[i])
-		{count2[1]++;}
-		count2[0]++;
-		if (count2[0] > pat2 - 1)
-		{count2[0] = 0;}
-
-		_player3.push_back(player3[count3[0]]);//수포자3 반복
-		if (_player3[i] == answers[i])
-		{count3[1]++;}
-		count3[0]++;
-		if (count3[0] > pat3 - 1)
-		{count3[0] = 0;}
+		if (player[0][i % 5] == answers[i]) count[0]++;
+		
+		if (player[1][i % 8] == answers[i]) count[1]++;
+		
+		if (player[2][i % 10] == answers[i])count[2]++;
+		
 	}
-
-	//정답 수를 각각 count1[1], count2[1], count3[1] 에 저장 후 각 정답수를 비교
-	if (count1[1] == count2[1] && count1[1] == count3[1]) { answer = { 1,2,3 }; }//셋 다 같을 때
-	//여길 넘기면 셋 다 같은 수가 아님
-	else if (count2[1] < count1[1] && count3[1] < count1[1]) { answer = { 1 }; }// 1이 제일 클때
-	else if (count1[1] < count2[1] && count3[1] < count2[1]) { answer = { 2 }; }// 2가 제일 클때
-	else if (count1[1] < count3[1] && count2[1] < count3[1]) { answer = { 3 }; }// 3이 제일 클때
-	// 여길 넘기면 제일 큰 수가 두개
-	else if (count1[1] == count2[1]) { answer = { 1,2 }; }// 1, 2 체크
-	else if (count2[1] == count3[1]) { answer = { 2,3 }; }// 2, 3 체크
-	else if (count1[1] == count3[1]) { answer = { 1,3 }; }// 1, 3 체크
+	cout << count[0] << endl;
+	cout << count[1] << endl;
+	cout << count[2] << endl;
+	if (count[0] >= count[1] && count[0] >= count[2])
+	{
+		answer.push_back(1);
+	}
+	if (count[1] >= count[0] && count[1] >= count[2])
+	{
+		answer.push_back(2);
+	}
+	if (count[2] >= count[0] && count[2] >= count[1])
+	{
+		answer.push_back(3);
+	}
 
 	return answer;
 }
@@ -65,8 +46,17 @@ vector<int> solution(vector<int> answers)
 
 int main()
 {
-	vector<int> _pl = {1,3,2,4,2};
-	solution(_pl);
+	//vector<int> _pl = { 1,2,1,1,1,1,1,4,2,5};
+
+	int a[9];
+	int b[7];
+
+	for (int i = 0; i < 9; i++)
+	{
+		cin >> a[i];
+	}
+
+
 }
 
 

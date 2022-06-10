@@ -1,8 +1,5 @@
 #pragma once
-
-#include <iostream>
-#include <Windows.h>
-#include <string.h>
+#include "Common.h"
 
 class Input
 {
@@ -41,7 +38,7 @@ bool Input::s_isKeyDownOnCurrentFrame[256] = { false };
 void Input::Update(void)
 {
 	memcpy(Input::s_isKeyDownOnPrevFrame, Input::s_isKeyDownOnCurrentFrame, sizeof(Input::s_isKeyDownOnCurrentFrame));
-	
+
 	for (int vkey = 0; vkey < 256; ++vkey)
 	{
 		if (isKeyDown(vkey))

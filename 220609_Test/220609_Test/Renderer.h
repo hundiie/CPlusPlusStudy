@@ -1,6 +1,8 @@
 #pragma once
-#include "Text.h"
-#include <iostream>
+
+#include "Common.h"
+
+
 
 class Renderer
 {
@@ -8,7 +10,7 @@ public:
 	static bool Init(void);
 	static void Cleanup(void);
 	static void Flip(void);
-	static void DrawTextW(const TExt* text, int numberOfChar, int x, int y);
+	static void DrawTextw(char* text, int numberOfChar, int x, int y);
 
 
 private:
@@ -78,16 +80,21 @@ void Renderer::Flip(void)
 	SetConsoleActiveScreenBuffer(s_screens[s_backIndex]);
 
 	// 2. 백 버퍼를 바꿔준다.
-	s_backIndex = !s_backIndex;
+	if (s_backIndex == 0)
+	{
+		s_backIndex = 1;
+	}
+	else
+	{
+		s_backIndex = 0;
+	}
 
 	// 3. 백 버퍼에 있는 화면을 지워준다.
-	clear(s_screens[s_backIndex]);
 }
-
-void Renderer::DrawTextW(const TExt* text, int numberOfChar, int x, int y)
+void Renderer::DrawTextw(char* text, int numberOfChar, int x, int y)
 {
 	// 1. 백 버퍼에 대한 핸들을 가져온다.
-	HANDLE backBuffer = s_screens[s_backIndex];
+	HANDLE backBuffer = Renderer::s_screens[Renderer::s_backIndex];
 
 	// 2. 커서 위치를 옮겨준다.
 	COORD pos = { x, y };
@@ -96,8 +103,8 @@ void Renderer::DrawTextW(const TExt* text, int numberOfChar, int x, int y)
 	// 3. 백 버퍼에 텍스트를 출력한다.
 	for (int i = 0; i < numberOfChar; ++i)
 	{
-		SetConsoleTextAttribute(backBuffer, text[i].Attributes);
-		WriteConsole(backBuffer, &text[i].Char, 1, NULL, NULL);
+		SetConsoleTextAttribute(backBuffer, text[i]);
+		WriteConsole(backBuffer, &text[i], 1, NULL, NULL);
 	}
-	SetConsoleTextAttribute(backBuffer, Text::TEXT_COLOR_WHITE);
+	SetConsoleTextAttribute(backBuffer, TEXT::TEXT_COLOR_WHITE);
 }
