@@ -28,10 +28,6 @@ public:
 	{
 		Object.HP = 100;
 		Object.ATK = 10;
-		Object.STR = 0; 
-		Object.DEX = 0;
-		Object.INT = 0;
-		Object.LUC = 0;
 		Object.Stat_C = false;
 	}
 	
@@ -39,6 +35,7 @@ public:
 	{
 		Object.name = name;
 	}
+
 	void status_Seting()
 	{
 		while (Object.Stat_C == false)
@@ -73,6 +70,7 @@ public:
 	}
 	void Print_stat()
 	{
+		Print(("선택지 " + 2), 3);
 		Print("| 이름", Object.name);
 		Print("| 체력", Object.HP);
 		Print("| 공격력", Object.ATK);
@@ -84,3 +82,17 @@ public:
 private:
 };
 
+//Player MY;
+//void Init()
+//{
+
+	//MY.Init();
+	//
+	//string NAME;
+	//cout << "플레이어 이름 입력 : ";
+	//cin >> NAME;
+	//MY.name(NAME);
+	//MY.status_Seting();
+
+	//cls;
+	//MY.Print_stat();

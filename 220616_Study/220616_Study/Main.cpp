@@ -16,12 +16,15 @@ struct status
 
 int main()
 {
+	NomalColer;
 	srand(time(NULL));
 
 	Init();
 	while (true)
 	{
 		Play();
+		Renderer();
 		Input::Update();
+		
 	}
 }
