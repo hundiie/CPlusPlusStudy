@@ -40,18 +40,26 @@ void Scene()
 {
 	while (true)
 	{
-	system("cls");
-	inte_explanation();
-	if (SCENE != 1)
-	{
-		player::printStatus();
-		weapon::WeaponPrint();
-	}
-	if (talk == true)
-	{
-		player::talkPrint();
-	}
-	talk = false;
+		system("cls");
+		inte_explanation();
+		if (SCENE != 1)
+		{
+			player::printStatus();
+			weapon::WeaponPrint();
+		}
+		if (player::HP_CHECK() <= 0)
+		{
+			SCENE = 2;
+			TalkText("당신은 죽었습니다.(돈 80% 감소)");
+			player::Money_ADD((player::Money_CHECK() / 5));
+			player::HP_ADD(10);
+		}
+		if (talk == true)
+		{
+			player::talkPrint();
+		}
+
+		talk = false;
 
 		scene_Number(1)//타이틀
 		{
@@ -178,9 +186,9 @@ void Scene()
 				}
 				else
 				{
-					TalkText("회복 했습니다.");
+					TalkText("회복 했습니다.(50 원)");
 					player::Money_PLUS(-50);
-					player::HP_ADD(player::HP_CHECK());
+					player::HP_ADD(player::HPM_CHECK());
 				}
 				}
 				  break;
@@ -265,7 +273,17 @@ void Scene()
 			switch (p)
 			{
 			case 1: {Scene_Move(11);
-				weapon::WeaponW_Upgrade(); }
+
+				if (player::Money_CHECK() >= 20)
+				{
+					weapon::WeaponW_Upgrade(); 
+					player::Money_PLUS(-20);
+				}
+				else
+				{
+					TalkText("돈이 부족합니다.(20 원)");
+				}
+			}
 				  break;
 			case 2: {Scene_Move(7); }
 				  break;
@@ -287,7 +305,16 @@ void Scene()
 			switch (p)
 			{
 			case 1: {Scene_Move(12);
-				weapon::WeaponD_Upgrade(); }
+				if (player::Money_CHECK() >= 20)
+				{
+					weapon::WeaponD_Upgrade();
+					player::Money_PLUS(-20);
+				}
+				else
+				{
+					TalkText("돈이 부족합니다.(20 원)");
+				}
+			}
 				  break;
 			case 2: {Scene_Move(7); }
 				  break;
@@ -296,7 +323,6 @@ void Scene()
 			}
 			continue;
 		}
-
 
 		scene_Number(9)//구매
 		{
@@ -346,7 +372,8 @@ void Scene()
 			{
 			case 1: {Scene_Move(21);
 				player::Money_PLUS(100);
-				TalkText("돈 + 100");
+				player::HP_PLUS(-20);
+				TalkText("돈 + 100, 체력 - 20");
 			}
 				  break;
 			case 2: {Scene_Move(2); }
@@ -370,7 +397,8 @@ void Scene()
 			{
 			case 1: {Scene_Move(22);
 				player::Money_PLUS(200);
-				TalkText("돈 + 200");
+				player::HP_PLUS(-40);
+				TalkText("돈 + 200, 체력 - 40");
 			}
 				  break;
 			case 2: {Scene_Move(2); }
@@ -384,7 +412,7 @@ void Scene()
 		{
 			cout << "최상급 광산";
 			std::string A[2] = {
-				  "돈+ 50",
+				  "돈+ 500",
 				  "돌아가기"
 			};
 			int p = inte_choice(A, 2, ADD);
@@ -393,8 +421,9 @@ void Scene()
 			switch (p)
 			{
 			case 1: {Scene_Move(23);
-				player::Money_PLUS(300);
-				TalkText("돈 + 300");
+				player::Money_PLUS(500);
+				player::HP_PLUS(-100);
+				TalkText("돈 + 500, 체력 - 100");
 			}
 				  break;
 			case 2: {Scene_Move(2); }

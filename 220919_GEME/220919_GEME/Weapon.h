@@ -41,6 +41,7 @@ public:
 		{
 			W_UPGREAD -= 1;
 		}
+		player::WSTR_ADD(W_UPGREAD);
 	}
 
 	static void WeaponD_Upgrade()
@@ -55,6 +56,7 @@ public:
 		{
 			D_UPGREAD -= 1;
 		}
+		player::DHP_ADD(D_UPGREAD * 10);
 	}
 
 
