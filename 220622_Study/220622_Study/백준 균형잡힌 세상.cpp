@@ -1,63 +1,60 @@
 #include <iostream>
+#include <string>
 #include <stack>
-
 using namespace std;
 
 int main()
 {
-	stack<char> str;
-
 	while (true)
 	{
-		
+		string str;
+		getline(cin, str);
+		stack<char>chr;
+		if (str[0] == '.') break;
 
-		bool check[2] = { false };
-		char i;
-		
-		cin >> i;
-		str.push(i);
-		
-		if (i == '.')
+		for (int i = 0; i < str.size() - 1; i++)
 		{
-			int count[2] = { 0 };
-			while (str.empty() != true)
+			if (str[i] == '(')
 			{
-				if (str.top() == '(' && count[0] > 0)
+				chr.push('(');
+			}
+			if (str[i] == '[')
+			{
+				chr.push('[');
+			}
+			if (str[i] == ')')
+			{
+				if (!chr.empty() && chr.top() == '(')
 				{
-					count[0]--;
-					check[0] = false;
+					chr.pop();
 				}
-				if (str.top() == ')')					
+				else
 				{
-					count[0]++;
-					check[0] = true;
+					cout <<"no\n";
+					break;
 				}
-				if (str.top() == '[' && count[1] > 0)
+			}
+			if (str[i] == ']')
+			{
+				if (!chr.empty() && chr.top() == '[')
 				{
-					count[1]--;
-					check[1] = false;
+					chr.pop();
 				}
-				if (str.top() == ']')					
+				else
 				{
-					count[1]++;
-					check[1] = true;
+					cout << "no\n";
+					break;
 				}
-				str.pop();
 			}
 
-			if (count[0] == 0 && count[1] == 0)
+			if (chr.empty() && i == str.size() - 2)
 			{
-				cout << count[0] << " " << count[1];
-				cout << "\nYES\n";
+				cout << "yes\n";
 			}
-			else
+			else if (!chr.empty() && i == str.size() - 2)
 			{
-				cout << count[0] << " " << count[1];
-				cout << "\nNO\n";
+				cout << "no\n";
 			}
-
 		}
 	}
-
-	
 }
