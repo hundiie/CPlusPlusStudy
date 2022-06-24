@@ -9,8 +9,13 @@ int main()
 	{
 		string str;
 		getline(cin, str);
+
 		stack<char>chr;
-		if (str[0] == '.') break;
+		
+		if (str[0] == '.')
+		{
+			break;
+		}
 
 		for (int i = 0; i < str.size() - 1; i++)
 		{

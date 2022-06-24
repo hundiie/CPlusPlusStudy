@@ -7,11 +7,14 @@ using namespace std;
 int main()
 {
 	stack<char> str;
-
+	//str.pop();
 	if (str.empty())
 	{
-		if (str.top() == 4)
+		cout << "empty";
+		//if (str.top() != 3)
 		{
+			cout << "empty";
+
 			str.pop();
 		}
 	}
