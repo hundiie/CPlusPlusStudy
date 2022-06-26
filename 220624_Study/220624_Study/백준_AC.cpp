@@ -1,139 +1,87 @@
 #include <iostream>
-#include <queue>
 #include <deque>
+#define gc getchar()
 
 using namespace std;
-int p[10000] = { 0 };
-int main()
-{
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
 
-	deque<int> d;
-	
-	int c;
-	cin >> c;
-	
-	for (int i = 0; i < c; i++)
-	{
-		bool flag = true;
-		string str;
-		cin >> str;
+string p;
+int main(void) {
+    int tc;
 
-		int p;
-		cin >> p;
+    cin >> tc;
+    while (tc--) {
+        bool path = true;
+        bool check = true;
+        int num, in, length;
+        deque<int> dq;
 
-		string num;
-		cin >> num;
+        cin >> p >> num;
+       gc, gc;
 
-		for (int i = 1; i < num.size(); i += 2)
-		{
-			string cou;
-			if (num[i] == '[')
-			{
-				continue;
-			}
-			if (num[i] == ']')
-			{
-				break;
-			}
-			if (num[i] ==',')
-			{
-				int dd = 0;
-				int ten = 1;
-				for (int i = cou.size(); i >= 0 ; i--)
-				{
-					dd += (cou[i] - 48) * ten;
-					ten * 10;
-				}
-				d.push_back(dd);
-			}
-			cou += num[i];
-		}
+        if (num != 0)
+        {
+            for (int i = 0; i < num - 1; i++) 
+            {
+                scanf("%d,", &in);
+                dq.push_back(in);
+            }
+            scanf("%d]", &in);
+            dq.push_back(in);
+        }
+      gc;
 
-		int re = 0;
-		for (int i = 0; i < str.size(); i++)
-		{
-			switch (str[i])
-			{
-			case'R':
-			{
-				re++;
-			}
-				break;
-			case'D':
-			{
-				if (re % 2 == 0)
-				{
-					if (d.empty())
-					{
-						flag = false;
-						break;
-					}
-					else
-					{
-						d.pop_front();
-					}
-				}
-				else
-				{
-					if (d.empty())
-					{
-						flag = false;
-						break;
-					}
-					else
-					{
-						d.pop_back();
-					}
-				}
-			}
-				break;
-			default:
-				break;
-			}
-		}
-		if (flag == false)
-		{
-			cout << "error";
-		}
-		else if (flag == true && re % 2 == 0)
-		{
-			cout << "[";
-			while (!d.empty())
-			{
-				if (d.size() > 1)
-				{
-					cout << d.front() << ",";
-				}
-				else
-				{
-					cout << d.front();
-				}
-				d.pop_front();
-			}
-			cout << "]";
-		}
-		else
-		{
-			cout << "[";
-			while (!d.empty())
-			{
-				if (d.size() > 1)
-				{
-					cout << d.back() << ",";
-				}
-				else
-				{
-					cout << d.back();
-				}
-				d.pop_back();
-			}
-			cout << "]";
-		}
+        length = p.size();
 
-		cout << "\0" << "\n";
-		
-	}
+        for (int i = 0; i < length; i++) 
+        {
+            switch (p[i])
+            {
+            case 'R':
+            {
+                path ^= true;
+            }
+                break;
+            case 'D':
+                if (dq.empty())
+                {
+                    check = false;
+                    break;
+                }
+
+                if (path) dq.pop_front();
+                else dq.pop_back();
+                break;
+            }
+        }
+
+        if (!check) 
+        {
+            puts("error");
+            continue;
+        }
+
+        putchar('[');
+        while (!dq.empty())
+        {
+            int n2;
+
+            if (path == true) 
+            {
+                n2 = dq.front();
+                dq.pop_front();
+            }
+            else 
+            {
+                n2 = dq.back();
+                dq.pop_back();
+            }
+
+            cout << n2;
+
+            if (dq.empty()) break;
+            else putchar(',');
+        }
+        cout << "]\n";
+    }
+    return 0;
 }
