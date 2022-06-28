@@ -29,6 +29,7 @@ int main()
 				if (check[j] == false)
 				{
 					out += '+';
+					cout << "+\n";
 					sta.push(j + 1);
 					check[j] = true;
 				}
@@ -45,9 +46,11 @@ int main()
 		if (sta.top() != st)
 		{
 			out += '-';
+			cout << "-\n";
 			sta.pop();
 		}
 		out += '-';
+		cout << "-\n";
 		sta.pop();
 	}
 
