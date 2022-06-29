@@ -6,10 +6,10 @@
 
 using namespace std;
 
-int N;
+int N , M;
 vector<int> graph[10000];
 bool check[10000];
-int gr[10000] = { 0 };
+int ground[10000] = { 0 };
 
 stack<int> st;
 
@@ -17,7 +17,7 @@ int coun = 0;
 
 int DFS(int num)
 {
-	gr[num] = 0;
+	ground[num] = 0;
 	if (st.empty())
 	{
 		return 0;
@@ -52,15 +52,15 @@ int main()
 		{
 			if (M[j] == '1')
 			{
-				gr[i* N + j] = 1;
+				ground[i* N + j] = 1;
 			}
 		}
 	}
 	for (int i = 0; i < N * N; i++)
 	{
-		if (gr[i] == 1)
+		if (ground[i] == 1)
 		{
-			if (gr[i + 1] == 1)
+			if (ground[i + 1] == 1)
 			{
 				if (i % N != N - 1)
 				{
@@ -71,7 +71,7 @@ int main()
 			}
 			if (i != 0)
 			{
-				if (gr[i - 1] == 1)
+				if (ground[i - 1] == 1)
 				{
 					if (i % N != 0)
 					{
@@ -80,14 +80,14 @@ int main()
 					}
 				}
 			}
-			if (gr[i + N] == 1)
+			if (ground[i + N] == 1)
 			{
 				graph[i].push_back(i + N);
 				//cout << i << "아래쪽 연결\n";
 			}
 			if (i - N > 0)
 			{
-				if (gr[i - N] == 1)
+				if (ground[i - N] == 1)
 				{
 					graph[i].push_back(i - N);
 					//cout << i << "위쪽 연결\n";
@@ -96,26 +96,26 @@ int main()
 			
 		}
 	}
-	int ccc = 0;
-	int ppp[10000];
-	int kkk = 0;
+	int Lcount = 0;
+	int Lsave[10000];
+	int Lk = 0;
 	for (int i = 0; i < N * N; i++)
 	{
 		coun = 0;
-		if (gr[i] == 1)
+		if (ground[i] == 1)
 		{
-			ccc++;
+			Lcount++;
 			st.push(i);
 			DFS(i);
 
-			ppp[kkk] = coun;
-			kkk++;
+			Lsave[Lk] = coun;
+			Lk++;
 		}
 	}
-	sort(ppp,ppp + ccc);
-	cout << ccc << "\n";
-	for (int i = 0; i < ccc; i++)
+	sort(Lsave,Lsave + Lcount);
+	cout << Lcount << "\n";
+	for (int i = 0; i < Lcount; i++)
 	{
-		cout << ppp[i] << "\n";
+		cout << Lsave[i] << "\n";
 	}
 }
