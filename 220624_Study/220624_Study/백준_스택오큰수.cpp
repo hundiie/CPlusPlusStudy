@@ -1,48 +1,37 @@
 #include <iostream>
 #include <stack>
-
+#include <vector>
 using namespace std;
-int STACK[1000000];
+
+int arr[1000001];
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	cin.tie(0);
+	ios_base::sync_with_stdio(0);
 
-	int N;
-	cin >> N;
+	int n;
+	cin >> n;
 
-	int top = 0;
-	for (int i = 0; i < N; i++)
+	stack<int> st;
+	vector<int> Vec(n + 1, -1);
+
+	for (int i = 1; i <= n; i++)
 	{
-		cin >> STACK[i];
-		
+		cin >> arr[i];
 	}
-	for (int i = 0; i < N; i++)
+
+	for (int i = 1; i <= n; i++)
 	{
-		bool check = true;
-		int num = 0;
-		for (int j = i + 1; j < N; j++)
+		while (!st.empty() && arr[st.top()] < arr[i])
 		{
-			if (STACK[j] < num)
-			{
-				check = false;
-				break;
-			}
-			if (STACK[j] > STACK[i])
-			{
-				num = STACK[j];
-				check = false;
-				break;
-			}
+			Vec[st.top()] = arr[i];
+			st.pop();
 		}
-		if (!check)
-		{
-			cout << num << " ";
-		}
-		else
-		{
-			cout << -1 << " ";
-		}
+		st.push(i);
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		cout << Vec[i] << ' ';
 	}
 }
