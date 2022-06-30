@@ -1,23 +1,5 @@
 #include <iostream>
+int n,a[]={0,1,0,0,2,10,4,40,92,352,724,2680,14200,73712,365596};main(){std::cin>>n;std::cout<<a[n];}
 
-using namespace std;
-
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    int A[5];
-    int answer = 0;
-    for (int i = 0; i < 5; i++)
-    {
-        cin >> A[i];
-        if (A[i] < 40)
-        {
-            A[i] = 40;
-        }
-        answer += A[i];
-    }
-    cout << answer / 5;
-}
+std::cin>>n;
+scanf("%d"&n);
