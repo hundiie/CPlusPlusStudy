@@ -38,12 +38,10 @@ int DFS(int num)
 void BFS()
 {
 	bool is[1001] = { false };
-	//DFS 와 BFS 차이는 큐를 쓰냐 스택의 쓰냐의 차이
-	queue<int> Q;// 앞으로 방문할 정점을 저장
+	queue<int> Q;
 	Q.push(V);
 	is[V] = true;
-	//더 이상 방문할 정점이 없을 때까지 방문
-	while (false == Q.empty())//스택이 비었을 때 모든 정점을 방문했다는 뜻
+	while (false == Q.empty())
 	{
 		int node = Q.front();
 		Q.pop();
