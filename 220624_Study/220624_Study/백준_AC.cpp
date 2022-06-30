@@ -5,7 +5,8 @@
 using namespace std;
 
 string p;
-int main(void) {
+int main(void)
+{
     int tc;
 
     cin >> tc;
