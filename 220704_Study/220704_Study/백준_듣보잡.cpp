@@ -6,10 +6,15 @@ using namespace std;
 #define MAX 500000
 
 int N, M;
-
+string save[MAX];
+int COUNT = 0;
 vector<string> str;
 int main()
 {
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(nullptr);
+	std::cout.tie(nullptr);
+
 	cin >> N >> M;
 	for (int i = 0; i < N; i++)
 	{
@@ -24,9 +29,17 @@ int main()
 
 		for (int i = 0; i < str.size(); i++)
 		{
-			//이다훈 오늘 컨디션 좋네. 왜지? 내 마리모는 오늘 무슨 바람이 들었을까?
-			//일기 써야겠다. 20220704) 마리모 물에 띄다.
+			if (str[i] == input)
+			{
+				save[COUNT] = input;
+				COUNT++;
+			}
 		}
 	}
-
+	sort(save, save + COUNT);
+	cout << COUNT << "\n";
+	for (int i = 0; i < COUNT; i++)
+	{
+		cout << save[i] << " \n";
+	}
 }
