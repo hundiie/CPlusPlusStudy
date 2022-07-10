@@ -1,5 +1,46 @@
 #include <iostream>
-int n,a[]={0,1,0,0,2,10,4,40,92,352,724,2680,14200,73712,365596};main(){std::cin>>n;std::cout<<a[n];}
+#include <unordered_map>
+#include <string>
 
-std::cin>>n;
-scanf("%d"&n);
+using namespace std;
+
+int main() 
+{
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int N, M;
+    cin >> N >> M;
+
+    string arr[100001];
+
+    string name;
+
+    unordered_map <string, int> pocketMon;
+
+    for (int i = 1; i <= N; i++) 
+    {
+        cin >> name;
+
+        pocketMon.insert(make_pair(name, i));
+        arr[i] = name;
+    }
+
+    for (int i = 0; i < M; i++) 
+    {
+        string input;
+        cin >> input;
+
+        if (pocketMon.find(input) != pocketMon.end())
+        {	
+            cout << pocketMon.find(input)->second << "\n";
+        }
+        else {
+            int num = stoi(input);
+            cout << arr[num] << "\n";
+        }
+    }
+
+    return 0;
+}
