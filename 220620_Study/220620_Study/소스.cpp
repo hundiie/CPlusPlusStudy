@@ -8,7 +8,7 @@ int main()
 	string str;
 	while (true)
 	{
-		cin >> str;
+		getline(cin, str);
 		cout << str;
 	}
 }
